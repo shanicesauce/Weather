@@ -1,0 +1,32 @@
+body{
+    background-color: rgb(255, 239, 242);
+}
+header {
+    background-image: linear-gradient(rgb(255, 221, 227),rgb(75, 75, 255));
+}
+.danger {
+    color: red;
+}
+
+.okay {
+    color: rgb(255, 157, 0);
+    text-shadow: 2px2px  black;
+}
+
+.safe {
+    color: green;
+}
+
+.btn {
+border: 2px solid black;
+}
+
+.card {
+    padding: 20px;
+    border: 2px solid black;
+
+}
+
+.hide > * {
+    display: none;
+}
