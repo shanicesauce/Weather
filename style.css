@@ -1,8 +1,19 @@
 body{
     background-color: rgb(255, 239, 242);
 }
-header {
-    background-image: linear-gradient(rgb(255, 221, 227),rgb(75, 75, 255));
+header, h4 {
+    background-image: linear-gradient(rgb(75, 75, 255),rgb(255, 239, 242));
+}
+.jumbotron {
+    background-image: linear-gradient(rgb(0, 0, 216),blue,rgb(155, 208, 255),rgb(255, 239, 242));
+    color: whitesmoke;
+}
+#forecast >* {
+    background-color: rgb(65, 64, 64);
+    color: whitesmoke;
+}
+.prev {
+    display: flex;
 }
 .danger {
     color: red;
@@ -10,7 +21,6 @@ header {
 
 .okay {
     color: rgb(255, 157, 0);
-    text-shadow: 2px2px  black;
 }
 
 .safe {
@@ -18,11 +28,19 @@ header {
 }
 
 .btn {
-border: 2px solid black;
+    background-color: rgb(9, 0, 141);
+    color: whitesmoke;
+    border: 2px solid black;
+}
+
+h2 {
+    border-bottom: 2px solid black;;
+    color: whitesmoke;
 }
 
 .card {
-    padding: 20px;
+    background-image: linear-gradient( rgb(9, 0, 141),rgb(3, 3, 233),blue);
+    padding: 15px;
     border: 2px solid black;
 
 }

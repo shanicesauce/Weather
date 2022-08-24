@@ -5,6 +5,7 @@ var weatherScreen = document.querySelector(".jumbotron")
 var tempInfoEl = document.querySelector("#tempInfo")
 var forecastEl = document.querySelector("#forecast")
 var unhideEl = document.querySelector("#unhide")
+var prevCity = document.querySelector(".saved")
 
 var temp = document.querySelector("#temp")
 var wind  = document.querySelector("#wind")
@@ -36,6 +37,8 @@ var getWeatherInfo = function(cityName){
 
 };
 
+
+
 var submitBtn = function(event) {
     event.preventDefault();
     var location = locationInput.value.trim();
@@ -51,6 +54,7 @@ var submitBtn = function(event) {
 userForm.addEventListener("submit",submitBtn)
 
 
+
 var displayCitySearch = function(city){
     if (city.length === 0){
         weatherScreen.textContent = "No location found.";
@@ -60,16 +64,32 @@ var displayCitySearch = function(city){
     var dateObject = new Date(searchTime)
     var date = dateObject.toLocaleString ([],{year:'numeric', month:'long',day:'2-digit'})
 
-    console.log(date);
-    var selectedCity = city.name + " " + date
+   var selectedCity = city.name + " " + date
    var cityTemp = city.main.temp
    var cityWindSpeed = city.wind.speed
    var cityHumidity = city.main.humidity  
 
     citySearched.textContent = selectedCity;
     temp.textContent= "Temp: " + cityTemp + "°F";
-    wind.textContent= "Wind:" +cityWindSpeed + " Mph";
+    wind.textContent= "Wind: " +cityWindSpeed + " Mph";
     humidity.textContent=  "Humidity: " + cityHumidity + "%"
+
+
+    var savedLocations = localStorage.getItem("cityHistory");
+        if (!savedLocations) {
+            var cityHistory = [];
+            cityHistory.push(city.name);
+            localStorage.setItem("cityHistory",JSON.stringify(cityHistory));
+         }
+         else {
+            savedLocations = JSON.parse(savedLocations);
+            savedLocations.push(city.name)
+            localStorage.setItem("cityHistory",JSON.stringify(savedLocations));
+         }
+
+
+ 
+    
 
     var longtitude = city.coord.lon;
     var latitude = city.coord.lat;
@@ -97,8 +117,7 @@ var displayCitySearch = function(city){
                 console.log(cityUVIndex);
             })
 
-        }
-       
+        }      
     })
     console.log(uvIndexApi);
 
@@ -120,7 +139,7 @@ var displayCitySearch = function(city){
 
                 firstCard.textContent= one;
                 minitemp.textContent= "Temp: " + data.list[3].main.temp + "°F"
-                miniwind.textContent= "Wind:" + data.list[3].wind.speed + " Mph"
+                miniwind.textContent= "Wind: " + data.list[3].wind.speed + " Mph"
                 minihumidity.textContent= "Humidity: " + data.list[3].main.humidity + "%"
 
                 firstCard.appendChild(minitemp)
@@ -138,7 +157,7 @@ var displayCitySearch = function(city){
 
                 secondCard.textContent= dos;
                 minitemptwo.textContent= "Temp: " + data.list[11].main.temp + "°F"
-                miniwindtwo.textContent= "Wind:" + data.list[11].wind.speed + " Mph"
+                miniwindtwo.textContent= "Wind: " + data.list[11].wind.speed + " Mph"
                 minihumiditytwo.textContent= "Humidity: " + data.list[11].main.humidity + "%"
 
                 secondCard.appendChild(minitemptwo)
@@ -156,7 +175,7 @@ var displayCitySearch = function(city){
 
                 thirdCard.textContent= tres;
                 minitempthree.textContent= "Temp: " + data.list[19].main.temp + "°F"
-                miniwindthree.textContent= "Wind:"+ data.list[19].wind.speed + " Mph "
+                miniwindthree.textContent= "Wind: " + data.list[19].wind.speed + " Mph"
                 minihumiditythree.textContent= "Humidity: " + data.list[19].main.humidity + "%"
 
                 thirdCard.appendChild(minitempthree)
@@ -174,7 +193,7 @@ var displayCitySearch = function(city){
 
                 forthCard.textContent= four;
                 minitempfour.textContent= "Temp: " + data.list[27].main.temp + "°F"
-                miniwindfour.textContent= "Wind:"+ data.list[27].wind.speed + " Mph "
+                miniwindfour.textContent= "Wind: " + data.list[27].wind.speed + " Mph"
                 minihumidityfour.textContent= "Humidity: " + data.list[27].main.humidity + "%"
 
                 forthCard.appendChild(minitempfour)
@@ -192,7 +211,7 @@ var displayCitySearch = function(city){
 
                 fifthCard.textContent= five;
                 minitempfive.textContent= "Temp: " + data.list[35].main.temp + "°F"
-                miniwindfive.textContent= "Wind:" + data.list[35].wind.speed + " Mph "
+                miniwindfive.textContent= "Wind: " + data.list[35].wind.speed + " Mph "
                 minihumidityfive.textContent= "Humidity: " + data.list[35].main.humidity + "%"
 
                 fifthCard.appendChild(minitempfive)
@@ -203,4 +222,26 @@ var displayCitySearch = function(city){
             })
         }
     })
+
+
 }
+
+
+var prevSearch = function() {
+   var savedLocations = JSON.parse(localStorage.getItem("cityHistory"))
+   
+
+     for (var i = 0; i< savedLocations.length; i++){
+        
+    var btnPrev = document.createElement("button")
+    btnPrev.classList.add("btn", "prev") 
+     btnPrev.textContent = savedLocations[i]
+	 prevCity.appendChild(btnPrev)
+
+     btnPrev.addEventListener("click",function(event){
+        getWeatherInfo(event.target.textContent)
+     })
+	
+    }
+}
+prevSearch()

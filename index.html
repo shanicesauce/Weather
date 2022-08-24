@@ -11,14 +11,14 @@
   </head>
   <body class="flex-column">
     <header class="hero"> 
-        <h1 class="app-title d-flex justify-content-center border-bottom border-dark"> Whats the Weather?</h1>
+        <h1 class="app-title d-flex justify-content-center"> Whats the Weather?</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
+    <main class="flex-row justify-content-between">
         <div class="row">
-            <div class="col">
+            <div class="col"> 
                 <div class="card">
-                <h3 class="card-header text-uppercase"> Search for city</h3>
+                <h2 class="card-header text-uppercase"> Search for city</h2>
                 <form id="user-form" class="card-body">
                     <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
                     <button type="submit" class="btn"> Get Weather </button>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-8">
                 <div class="jumbotron">
-                    <h2 id="citySearch"> </h2>
+                    <h3 id="citySearch"> </h3>
                     <div id="tempInfo">
                       <p id="temp"> Temp:</p>
                       <p id="wind"> Wind:</p> 
@@ -38,16 +38,16 @@
             </div>
         </div>
         <div class="row"> 
-          <div class="col" >
-            <div>
-              <h3> Previous Searches</h3>
+          <div class="col-4" >
+            <div class="saved">
+                <h3> Previous Searches</h3>
             </div>
           </div>
           <div class="col">
             <div class="hide d-inline-flex" id="unhide"> 
-              <h4> 5-Day Forcast:</h4> <br>
+              <h3> 5-Day Forcast:</h3> <br>
             </div>
-            <div class=" hide d-flex justify-content-between" id="forecast">
+            <div class=" hide d-flex flex-row" id="forecast">
               <section class="card" id="one">day 1</section>
               <section class="card" id="two">day 2</section>
               <section class="card" id="three">day 3</section>
