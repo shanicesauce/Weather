@@ -83,8 +83,10 @@ var displayCitySearch = function(city){
          }
          else {
             savedLocations = JSON.parse(savedLocations);
+            if (!savedLocations.includes(city.name)){
             savedLocations.push(city.name)
             localStorage.setItem("cityHistory",JSON.stringify(savedLocations));
+            }
          }
 
 
@@ -230,7 +232,7 @@ var displayCitySearch = function(city){
 var prevSearch = function() {
    var savedLocations = JSON.parse(localStorage.getItem("cityHistory"))
    
-
+if (savedLocations.length > 0){
      for (var i = 0; i< savedLocations.length; i++){
         
     var btnPrev = document.createElement("button")
@@ -243,5 +245,6 @@ var prevSearch = function() {
      })
 	
     }
+}
 }
 prevSearch()
